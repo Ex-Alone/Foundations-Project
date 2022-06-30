@@ -1,0 +1,175 @@
+<!--Author: David Otero July 1, 2022-->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Virtual Integration Via Open</title>
+</head>
+<body>
+    <h1>VIVO - Test Console</h1>
+    <input id="tester" type="text" placeholder="UserID" value= ></input>
+    <button id="fetching">GET</button>
+    <button id="nuke" onclick="nuke()">NUKE</button> <!--resets all defect statuses to pending-->
+    <pre id="populate"></pre>
+    <input id="object" onclick="loop()" type="text" placeholder="DefectID" value= > <!--value intentionally left without quotations marks LINE 39-->
+    <select id="terms">
+        <option value="0"></option>
+        <option value="1">Accept</option>
+        <option value="2">Decline</option>
+    </select>
+    <select id="troubleshoot">
+        <option value="default"></option>
+        <option value="Rejected">Reject</option>
+        <option value="Fixed">Fix</option>
+        <option value="Shelved">Shelf</option>
+    </select>
+    <button id="update">APPLY</button>
+</body>
+<br><br>
+<footer><center><strong>© 2022 | Virtual Integration Via Open | VIVO</strong></center></footer>
+<br><br>
+<script>
+    let defectId; //value for defect id
+    let process; //defectID from textfield 
+    let jsonObj; //json file from database
+    let objects; //number of objects in json
+    let output; //ready to print onto html page
+    let filter = []; //array used to print onto webpage
+    let clicks = 0; //number of clicks made inside textfield for defect id (loops an iteration of defect id's)
+    let data; //data in array
+    let a; //accept/decline value 
+    let e; //reject/fix/shelve
+    let all = "Pending"; //nuke
+    function loop (){ //do-click function (defectId's)
+        let abc = filter[clicks++];
+        document.getElementById("object").value = abc; //updates value inside input textfield (onclick)
+        process = document.getElementById("object").value; //retreives defectID from the same input textfield
+        if(clicks == filter.length){
+            clicks = 0; //loops every time you click inside text field <input>
+        }
+    }
+    function check (s){ //looks for the status value in the current state before changes are made (part of my conditional IF statements)
+        let xyz;
+        for(let x = 0; x < objects; x++){ //looping
+            if(s == jsonObj[x].defectId){ //matching
+                xyz = jsonObj[x].status; //assignment
+            }
+        }
+        return xyz;
+    }
+    function reset (){ //resets select <option> to original state
+        document.getElementById("terms").selectedIndex = 0;
+        document.getElementById("troubleshoot").selectedIndex = 0;
+    }
+    async function nuke (){
+        for(let x = 0; x < objects; x++){
+            let y = jsonObj[x].defectId
+            let config = { //object
+                method:"PATCH", //PATCH is used to make changes to json on server side
+                headers:{'Content-Type':"application/json"}, 
+                body: JSON.stringify({status: all}) //this is the key to PATCH (update)
+            }
+            await fetch(`https://bugcatcher.coe.revaturelabs.com/6/defects/${y}`, config); //match defectId to change status
+            console.log(`id: ${y} is changing status: ${all}`);
+        }
+    }
+    const details = {name: 'David' , age: 39};
+    sessionStorage.setItem('occupation', 'Software Engineer');
+    sessionStorage.setItem('person', JSON.stringify(details));
+    console.log(sessionStorage.getItem('occupation'));
+    console.log(JSON.parse(sessionStorage.getItem('person')));
+    const fetching = document.getElementById("fetching");
+    const update = document.getElementById("update");
+    fetching.addEventListener("click", fetchDefects); //GET button (fetch)
+    update.addEventListener("click", fetchDefects);
+    async function fetchDefects(){
+        let httpResponse = await fetch("https://bugcatcher.coe.revaturelabs.com/6/defects"); //url to api
+        let condition = document.getElementById("condition");
+        if(httpResponse.status === 200){ // GET request
+            console.log(httpResponse.status); //CODE 200
+            document.getElementById("populate").innerHTML = ""; //clears content on screen (refresh)
+            jsonObj = await httpResponse.json(); //json file with all the objects
+            objects = Object.keys(jsonObj).length; //number of objects in json (11 total so far)
+            num = 1; //ordered list (custom)
+            for(let key of jsonObj){ //loops thru json to print out objects
+                if(key.assignedTo == tester.value){ //matching tester to object in json
+                    filter.push(key.defectId); //add data from json objects into array one element at a time
+                    data = document.getElementById("populate");
+                    output = document.createElement("populate");
+                    output.innerText =  [
+                                            num++ + "." + "\n"  + //ex. 1. 2. 3. etc.
+                                            "DefectID:     \t"  + key['defectId'        ]   + "\n" + 
+                                            "Assigned To:  \t"  + key['assignedTo'      ]   + "\n" + 
+                                            "Description:  \t"  + key['desc'            ]   + "\n" +
+                                            "ReproduceSteps\t"  + key['stepsToReproduce']   + "\n" +
+                                            "Priority:     \t"  + key['priority'        ]   + "\n" +
+                                            "Status:       \t"  + key['status'          ]   + "\n\n"
+                                        ];
+                    data.appendChild(output);
+                }
+            }   
+        } else {
+            console.log("Did not connect.");
+        }
+        console.log(objects);
+        a = document.getElementById("terms").value; //assignment APPROVE/DECLINE (alternative: condition.options[condition.selectedIndex].value)
+        e = document.getElementById("troubleshoot").value; //assignment REJECT/FIX/SHELF
+        defectId = document.getElementById("object").value; //assignment of defect id from text field that loops every time you click inside
+        let current = check(process) //object in json is Calling this FUNCTION to assign the variable CURRENT
+        let i = (current == "Pending"); // 'i' is used 2 (simplified)
+        let bool = (e === "Rejected") || (e === "Fixed") || (e === "Shelved"); // 'bool' is used 3 times (simplified)
+        let boolean = (current === "Rejected") || (current === "Fixed") || (current === "Shelved"); //this is different from above "final" was assigned from a method, "bool" was not, it was selected
+        //retrieve current status before any change is attempted (ex. you want to switch from rejectd/fixed/shelved to approved/declined) NOT ALLOWED
+        if(i && bool){ //prevent tester from skipping the approval stage to reject/fix/shelf
+            reset(); //reset values for select <option>
+            alert("do nothing"); 
+        }else if (bool && !(a == 0)){ //checking if both options are selected - forces you to only pick one YOU CANNOT SELECT BOTH OPTIONS AT THE SAME TIME
+            reset(); //status will not change because you cannot submit both options
+            alert("You cannot submit both options.");
+        }else if (boolean){ //CATCH: once finalized user should not be able to revert to accept or decline state SHOULD NOT BE ABLE TO GO BACK TO APPROVAL STATE IF FINALIZED WITH REJECTED/FIXED/SHELVED
+                reset(); //reset values for select <option>
+        }else if((a == 1) || (e != "default")){ //your selection should be one or the other not both //THE ALGORITHM
+            let variable = check(process); //status value before change (checks json)
+            if(bool){ //either accept/decline(default) or reject/fix/shelve (overrides),
+                if(variable == "Declined"){//changes are only made on approval ("Accepted") IF DECLINED - YOU CANNOT FINALIZE WITH REJECT/FIXED/SHELVED
+                    reset(); //reset values for select <option>
+                    alert("Cannot make changes if status is declined.");
+                    fetchDefects(); //refreshes screen
+                }else if (i){ // IF STATUS IS PENDING YOU CANNOT SKIP TO FINALIZE
+                    reset(); //reset values for select <option>
+                    alert("do nothing")
+                }else{ // GO AHEAD AND MAKE THE CHANGE FROM APPROVAL TO REJECTED/FIXED/SHELVED
+                    reset(); //reset values for select <option>
+                    update(e); // 'e' is a string value, passing parameter to function to PATCH info 's' not declared below PATCH
+                    alert("Updating database. This case is now closed.");
+                    fetchDefects(); //refreshes screen
+                }
+            }else{ //YOU HAVE SELECTED ACCEPT 
+                reset(); //reset values for select <option>
+                update("Accepted"); //PATCH
+                alert("Accepted. Updating database.");
+                fetchDefects(); //refreshes screen
+            }
+        }else if(a == 2){ //YOU HAVE SELECTED DECLINED
+            reset(); //reset values for select <option>
+            update("Declined"); //PATCH
+            fetchDefects(); //refreshes screen
+            alert("Declined. Updating database.");
+        }
+        async function update (s){ //parameter (status) 's' not declared
+            let config = { //object
+                method:"PATCH", //PATCH is used to make changes to json on server side
+                headers:{'Content-Type':"application/json"}, 
+                body: JSON.stringify({status: s}) //this is the key to PATCH (update)
+            }
+            let response = await fetch(`https://bugcatcher.coe.revaturelabs.com/6/defects/${defectId}`, config); //match defectId to change status
+            if(response.status === 204){
+                console.log(`Connected! CODE: ${response.status}`);
+            }else if (response.status === 405){ //incorrect defectId and/or key 
+                console.log(`CODE: ${response.status}`);
+            } else {
+                console.log(`CODE: ${response.status}`); //other codes go here
+            }
+        }        
+    }
+</script>
+</html>

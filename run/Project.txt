@@ -1,0 +1,59 @@
+package com.kronosek.steps;
+
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebElement;
+
+import com.kronosek.runner.TestRunner;
+
+import io.cucumber.java.en.Given;
+import io.cucumber.java.en.Then;
+import io.cucumber.java.en.When;
+import org.junit.*;
+
+public class Project {
+
+    @Given("Manager creates new defects")
+    public void manager_creates_new_defects() {
+        // drivers have a method called get() which provides an easy way to pull up a webpage in browser
+        TestRunner.driver.get("https://www.wikipedia.org/");
+    }
+
+    @When("Tester logs into database")
+    public void tester_logs_into_database() {
+        /*
+            there are a few things we need to set up for Selenium to interact with the element
+            1. we need to create a java object that represents the element
+            2. we need to tell Selenium that the element is the specific one we want to interact with
+            3. we tell Selenium what action to take on the element we specified
+        */
+
+        //step 1: create object that represent the element we want to interact with
+        By englishLinkInfo = By.id("js-link-box-en");
+        //step 2: create a web element object to actually represent the element we are interacting with
+        WebElement englishLink = TestRunner.driver.findElement(englishLinkInfo);
+        //step 3: tell Selenuium what action to take on the element
+        englishLink.click();
+    }
+
+    @When("Tester searches backlog")
+        public void tester_searches_backlog() {
+        // Write code here that turns the phrase above into concrete actions
+    }
+
+    @When("Tester applys updates")
+        public void tester_applys_updates() {
+        // Write code here that turns the phrase above into concrete actions
+    }
+    @When("Tester troubleshoots")
+        public void tester_troubleshoots() {
+        // Write code here that turns the phrase above into concrete actions
+    }
+    
+    @Then("Update the database")
+    public void update_the_database() {
+        // an easy way to check that you are on a new page is to check the title
+        String actualTitle = TestRunner.driver.getTitle();
+        // to confirm the title is correct and we are on the right page I will use the Assert class
+        Assert.assertEquals("Wikipedia, the free encyclopedia", actualTitle);
+    }
+}
