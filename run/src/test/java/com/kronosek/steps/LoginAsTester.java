@@ -1,6 +1,7 @@
 package com.kronosek.steps;
 
 import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 
 import com.kronosek.runner.TestRunner;
@@ -11,9 +12,12 @@ import io.cucumber.java.en.When;
 
 public class LoginAsTester {
     
+    public LoginAsTester() {
+    }
+
     @Given("the tester is on the login page")
     public void the_tester_is_on_the_login_page (){
-        TestRunner.driver.get("C:/Users/18623/Desktop/Project One/Automation/run/src/test/resources/webpages/LoginAs.html");
+        TestRunner.driver.get("C:/Users/18623/Desktop/Project One/Automation/Foundations-Project/run/src/test/resources/webpages/LoginAs.html");
     }
 
     @When("the tester enters the correct username")

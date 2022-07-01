@@ -15,9 +15,12 @@ public class AdminConsole {
     
     WebDriver driver;
 
+    public AdminConsole() {
+    }
+
     @Given("the manager is on the admin console")
     public void the_manager_is_on_the_admin_console (){
-        TestRunner.driver.get("C:/Users/18623/Desktop/Project One/Automation/run/src/test/resources/webpages/AdminConsole.html");
+        TestRunner.driver.get("C:/Users/18623/Desktop/Project One/Automation/Foundations-Project/run/src/test/resources/webpages/AdminConsole.html");
     }
 
     @When("the manager types description of defect in text field")
@@ -29,8 +32,8 @@ public class AdminConsole {
 
     @When("the manager assigns defect to tester")
     public void the_manager_assigns_defect_to_tester (){
-        By description = By.id("defect");
-        WebElement defect = TestRunner.driver.findElement(description);
+        By securityAlert = By.id("defect");
+        WebElement defect = TestRunner.driver.findElement(securityAlert);
         //defect.sendKeys("CISCO Access Points (security exploit)");
         defect.sendKeys("RedHat Support (malware)");
         //defect.sendKeys("RansomWare! ₿ (new deadline)"); //₿

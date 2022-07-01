@@ -1,47 +1,51 @@
 package com.kronosek.runner;
 
+//import java.time.Duration;
+
 import org.junit.AfterClass;
 import org.junit.BeforeClass;
 import org.junit.runner.RunWith;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.support.ui.WebDriverWait;
+
+import com.kronosek.steps.AdminConsole;
+import com.kronosek.steps.LoginAsManager;
+import com.kronosek.steps.LoginAsTester;
+import com.kronosek.steps.TesterConsole;
 
 import io.cucumber.junit.Cucumber;
 import io.cucumber.junit.CucumberOptions;
 
-@RunWith(Cucumber.class) //annotations change at runtime, telling Junit other dependancies working with
-    /*
-     * features: this tells Cucumber where the feature files are located: this can be a folder or a direct
-     * path to individual feature files: below are just listing the folder that holds the feature files
-     * 
-     * glue: this tells Cucumber where the code is located to implement each step of the acceptance criteria.
-     * You can put the path to either individual java files, or the package that holds all the steps
-     */
+@RunWith(Cucumber.class)
 @CucumberOptions(features="classpath:features", glue="com/kronosek/steps")
-public class TestRunner{
-    //this class will handle setting up the automation code and tearing it down when it is done
-
-    /* 
-     * this class will be Junit's contribution to our automation code: it provides the means of setting up
-     * al of our data for automation tests, and then it closes down all the necessary tools we use so that
-     * our application doesn't eat up all our memory
-     */
+public class TestRunner {
 
     public static WebDriver driver;
+    public static LoginAsManager loginAsManager;
+    public static LoginAsTester loginAsTester;
+    public static AdminConsole adminConsole;
+    public static TesterConsole testerConsole;
+    public static TestRunner testerRunner;
+    public static WebDriverWait wait;
 
-    @BeforeClass
+    @BeforeClass // this makes the method execute before all the steps
     public static void setup(){
-        System.out.println("This method runs before the steps");
+        // make sure to set the value for the key as the full relative path to the chromedriver.exe
         System.setProperty("webdriver.chrome.driver", "src/test/resources/chromedriver.exe");
-        //reference to chrome driver: this is how we let code know where chrome driver is
         driver = new ChromeDriver();
-        //we set driver field to be a ChromeDriver object, now ready to interact with Chrome
+        loginAsManager = new LoginAsManager();
+        loginAsTester = new LoginAsTester();
+        adminConsole = new AdminConsole();
+        testerRunner = new TestRunner();
+        testerConsole = new TesterConsole();
+        // the WebDriverWait is used to tell Selenium to wait up to a set amount of time for a given condition
+        wait = new WebDriverWait(driver, 2);
     }
 
-    @AfterClass
+    @AfterClass // this makes the method execute after all the steps
     public static void teardown(){
-        System.out.println("This method runs after the steps");
-        //driver.quit(); //closes driver so we don't have to manually close it
+        driver.quit();
     }
-
+    
 }
