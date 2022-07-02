@@ -33,15 +33,16 @@ public class TesterConsole {
     public void the_tester_selects_the_defect_id_by_level_of_priority () {
         By id = By.id("object");
         WebElement defectId = TestRunner.driver.findElement(id);
-        defectId.sendKeys("94950");
+        defectId.sendKeys("19006");
     }
 
-    // @When("the tester updates defect status to fixed")
-    // public void the_tester_updates_defect_status_to_fixed (String Fixed) {
-    //     WebElement select = driver.findElement(By.id("troubleshoot"));
-    //     Select options = new Select(select);
-    //     options.selectByVisibleText(Fixed);
-    // }
+    @When("the tester updates defect status to fixed")
+    public void the_tester_updates_defect_status_to_fixed (String Fixed) {
+        By selectElementBy = By.id("troubleshoot");
+        WebElement troubleshoot = TestRunner.driver.findElement(selectElementBy);
+        Select t = new Select(troubleshoot);
+        t.selectByIndex(1);
+    }
 
     @When("the tester clicks on button to apply changes")
     public void the_tester_clicks_on_button_to_apply_changes () {
