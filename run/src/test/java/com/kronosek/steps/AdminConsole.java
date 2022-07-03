@@ -11,8 +11,7 @@ import io.cucumber.java.en.When;
 public class AdminConsole {
     
     WebDriver driver;
-    int binary;
-
+   
     @Given("the manager is on the admin console")
     public void the_manager_is_on_the_admin_console (){
         TestRunner.driver.get("C:/Users/18623/Desktop/Project One/Automation/Foundations-Project/run/src/test/resources/webpages/AdminConsole.html");
@@ -30,58 +29,21 @@ public class AdminConsole {
         By securityAlert = By.id("defect");
         WebElement defect = TestRunner.driver.findElement(securityAlert);
             
-            int i = 0;
-            while (i<8){ //setting up ipv4 address to ping class a b c
-                binary = (int)(Math.random() * 2) + 0;
-                defect.sendKeys(Integer.toString(binary));
-                i++;
-            }//₿
+        int classB = 172;
+        int octect2 = (int)(Math.random() * 16) + 16;
+        int octect3 = (int)(Math.random() * 254) + 1;
+        int octect4 = (int)(Math.random() * 254) + 1;
 
-            defect.sendKeys(".");
-            i=0;
-            defect.sendKeys(Integer.toString(binary));
-            while (i<8){ //setting up ipv4 address to ping class a b c
-                binary = (int)(Math.random() * 2) + 0;
-                defect.sendKeys(Integer.toString(binary));
-                i++;
-            }//₿
-
-            defect.sendKeys(".");
-            i=0;
-            defect.sendKeys(Integer.toString(binary));
-            while (i<8){ //setting up ipv4 address to ping class a b c
-                binary = (int)(Math.random() * 2) + 0;
-                defect.sendKeys(Integer.toString(binary));
-                i++;
-            }//₿
-
-            defect.sendKeys(".");
-            i=0;
-            while (i<8){ //setting up ipv4 address to ping class a b c
-                binary = (int)(Math.random() * 2) + 0;
-                defect.sendKeys(Integer.toString(binary));
-                i++;
-            }//₿
+        defect.sendKeys(Integer.toString(classB));
+        defect.sendKeys(".");
+        defect.sendKeys(Integer.toString(octect2));
+        defect.sendKeys(".");
+        defect.sendKeys(Integer.toString(octect3));
+        defect.sendKeys(".");
+        defect.sendKeys(Integer.toString(octect4));
+    
+    }//₿
         
-    }
-        
-    @When("the manager selects a priority level")
-    public void the_manager_selects_a_priority_level () throws InterruptedException{//skipped for now, randomized in javascript
-        // int e = (int)(Math.random() * 3) + 0;
-        // By selectElementBy = By.id("priority");
-        // WebElement priority = TestRunner.driver.findElement(selectElementBy);
-        // Select i = new Select(priority);
-        // if(e == 1){
-        //     i.selectByIndex(0);
-        // }else if(e == 2){
-        //     i.selectByIndex(1);
-        // }else if(e == 3){
-        //     i.selectByIndex(2);
-        // }
-        System.out.println("What is the value of this: ");
-    }
-
-
     @Then("the manager clicks on the submit button and ok on the alert box")
     public void the_manager_clicks_on_the_submit_button_and_ok_the_alert_box () throws InterruptedException{
         By submitButton = By.id("submit");
@@ -89,7 +51,5 @@ public class AdminConsole {
         submit.click();
         //TestRunner.driver.switchTo().alert().accept();
     }
-
-    
 
 }

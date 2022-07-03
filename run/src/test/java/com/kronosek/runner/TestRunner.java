@@ -10,9 +10,9 @@ import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 import com.kronosek.steps.AdminConsole;
-import com.kronosek.steps.LoginAsTester;
-import com.kronosek.steps.TesterConsole;
-import com.kronosek.steps.LoginAsManager;
+//import com.kronosek.steps.LoginAsTester;
+//import com.kronosek.steps.TesterConsole;
+//import com.kronosek.steps.LoginAsManager;
 
 import io.cucumber.junit.Cucumber;
 import io.cucumber.junit.CucumberOptions;
@@ -22,10 +22,10 @@ import io.cucumber.junit.CucumberOptions;
 public class TestRunner {
 
     public static WebDriver driver;
-    public static LoginAsManager loginAsManager;
-    public static LoginAsTester loginAsTester;
+    //public static LoginAsManager loginAsManager;
+    //public static LoginAsTester loginAsTester;
     public static AdminConsole adminConsole;
-    public static TesterConsole testerConsole;
+    //public static TesterConsole testerConsole;
     public static TestRunner testerRunner;
     public static WebDriverWait wait;
 
@@ -34,12 +34,12 @@ public class TestRunner {
         // make sure to set the value for the key as the full relative path to the chromedriver.exe
         System.setProperty("webdriver.chrome.driver", "src/test/resources/chromedriver.exe");
         driver = new ChromeDriver();
-        loginAsManager = new LoginAsManager();
-        loginAsTester = new LoginAsTester();
+        //loginAsManager = new LoginAsManager();
+        //loginAsTester = new LoginAsTester();
         
         new TestRunner();
         new AdminConsole();
-        testerConsole = new TesterConsole();
+        //testerConsole = new TesterConsole();
         // the WebDriverWait is used to tell Selenium to wait up to a set amount of time for a given condition
         wait = new WebDriverWait(driver, 2);
     }
