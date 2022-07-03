@@ -11,6 +11,7 @@
    <input id="defect" type="text" placeholder="defect name"></input>
    
    <select id="priority" name="priority">
+      <option></option>
       <option value="Low">Low</option>
       <option value="Medium">Medium</option>
       <option value="High">High</option>
@@ -20,39 +21,19 @@
     
 </body>
 <script>
-   
+
    const submit = document.getElementById("submit");
-   //const priority = document.getElementById("priority");
+   submit.addEventListener("click", fetching);
 
-   submit.addEventListener("click", defect);
-   //priority.addEventListener("click", defect);
-
-   async function defect(){
-
-      // let API create the defect
-      function getRandomInt(max) {
-         return Math.floor(Math.random() * max); //this is a temporary fix until i figure out why java doesn't select the drop down
-      }
-
-      let sp;
-      let random = getRandomInt(3); //random severity and priority are equal, ping 32 bit ipv4 address, coming up
-
-      if(random === 0){ //temporary fix
-         sp = "Low";
-      }else if(random === 1){
-         sp = "Medium";
-      }else if(random === 2){
-         sp = "High";
-         
-      }
-
+   async function fetching(){
+      
         let createDefect =  {
             assignedTo: document.getElementById("tester").value,
             dateReported: 0,
             desc: document.getElementById("defect").value,
             stepsToReproduce: "ping",
-            severity: sp,
-            priority: sp
+            severity: "Medium",
+            priority: document.getElementById("priority").value
          }
 
         // now that I have the key/value pairs information I need to convert it into a JSON

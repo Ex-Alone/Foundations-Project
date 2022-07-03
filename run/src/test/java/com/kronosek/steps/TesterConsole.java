@@ -32,7 +32,7 @@ public class TesterConsole {
         By apply = By.id("update");
         WebElement button = TestRunner.driver.findElement(apply);
         button.click();
-        Thread.sleep(2000);
+        Thread.sleep(2250);
         TestRunner.driver.switchTo().alert().accept();
     }
 
@@ -59,6 +59,7 @@ public class TesterConsole {
     public void the_tester_selects_a_defect_level_of_priority_first() {
         defectId();
     }
+
     @When("the tester updates a defect status to accept first")
     public void the_tester_updates_a_defect_status_to_accept_first() {
         int x = 1;
