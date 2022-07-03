@@ -10,53 +10,53 @@
    <input id="tester" type="text" placeholder="tester name"></input>
    <input id="defect" type="text" placeholder="defect name"></input>
    
-   <select id="priority">
-      <option value="High">High</option>
-      <option value="Medium">Medium</option>
+   <select id="priority" name="priority">
       <option value="Low">Low</option>
+      <option value="Medium">Medium</option>
+      <option value="High">High</option>
     </select>
 
    <button id="submit">Submit</button>
     
 </body>
 <script>
-   /*
-      Psuedo Code: Follow 4 steps
-      1. Create JavaScript object that contains all the information
-
-         {
-            "assignedTo": actual tester username goes,
-            "dateReported": 0,
-            "desc": name of defect goes here,
-            "stepsToReproduce": "string",
-            "severity": "Low",
-            "priority": "Low"
-         }
-
-      2. convert javascript object into a JSON
-      3. create config object and fetch url
-      4. handle the response
-   */
+   
    const submit = document.getElementById("submit");
-   const priority = document.getElementById("priority");
+   //const priority = document.getElementById("priority");
 
    submit.addEventListener("click", defect);
+   //priority.addEventListener("click", defect);
+   
 
    async function defect(){
         // let API create the defect
+        function getRandomInt(max) {
+         return Math.floor(Math.random() * max); //this is a temporary fix until i figure out why java doesn't select the drop down
+      }
+
+      let sp;
+      let random = getRandomInt(3); //random severity and priority are equal, ping 32 bit ipv4 address, coming up
+
+      if(random === 0){
+         sp = "Low";
+      }else if(random ===1){
+         sp = "Medium";
+       
+      }else if(random ===2){
+         sp = "High";
+         
+      }
         let createDefect =  {
             assignedTo: document.getElementById("tester").value,
             dateReported: 0,
             desc: document.getElementById("defect").value,
-            stepsToReproduce: "string",
-            severity: "High",
-            priority: document.getElementById("priority").value
+            stepsToReproduce: "ping",
+            severity: sp,
+            priority: sp
          }
 
         // now that I have the key/value pairs information I need to convert it into a JSON
         let createDefectJSON = JSON.stringify(createDefect);
-        console.log(createDefect) // works! (debugging)
-        console.log(createDefectJSON) //works! (debugging)
 
         // now I can set up my HTTP request configurations
         let config = {
@@ -71,7 +71,6 @@
             console.log("Executed 201 Code")
             alert("You connected.");
             
-             
         } else {
             console.log("did not connect");
             alert("Did not connect.");

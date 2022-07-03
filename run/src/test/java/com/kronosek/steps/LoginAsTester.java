@@ -24,7 +24,7 @@ public class LoginAsTester {
     public void the_tester_enters_the_correct_username (){
         By usernameInfo = By.id("username");
         WebElement username = TestRunner.driver.findElement(usernameInfo);
-        username.sendKeys("David");
+        username.sendKeys("David17");
     }
 
     @When("the tester enters the correct password")

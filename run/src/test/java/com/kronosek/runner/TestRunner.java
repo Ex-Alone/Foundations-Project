@@ -10,9 +10,9 @@ import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 import com.kronosek.steps.AdminConsole;
-import com.kronosek.steps.LoginAsManager;
 import com.kronosek.steps.LoginAsTester;
 import com.kronosek.steps.TesterConsole;
+import com.kronosek.steps.LoginAsManager;
 
 import io.cucumber.junit.Cucumber;
 import io.cucumber.junit.CucumberOptions;
@@ -36,15 +36,17 @@ public class TestRunner {
         driver = new ChromeDriver();
         loginAsManager = new LoginAsManager();
         loginAsTester = new LoginAsTester();
-        adminConsole = new AdminConsole();
-        testerRunner = new TestRunner();
+        
+        new TestRunner();
+        new AdminConsole();
         testerConsole = new TesterConsole();
         // the WebDriverWait is used to tell Selenium to wait up to a set amount of time for a given condition
         wait = new WebDriverWait(driver, 2);
     }
 
     @AfterClass // this makes the method execute after all the steps
-    public static void teardown(){
+    public static void teardown() throws InterruptedException{
+        Thread.sleep(1000);
         driver.quit();
     }
     

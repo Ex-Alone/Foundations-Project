@@ -5,5 +5,5 @@ Feature: Managers should be redirected to admin console after a successful login
         Given   the manager is on the admin console
         When    the manager types description of defect in text field
         When    the manager assigns defect to tester
-        When    the manager clicks on the submit button
-        Then    the manager should see an alert
+        When    the manager selects a priority level
+        Then    the manager clicks on the submit button and ok on the alert box

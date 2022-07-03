@@ -18,42 +18,171 @@ public class TesterConsole {
     }
 
     @Given("the tester is logged into the console")
-    public void the_tester_is_logged_into_the_console (){
+    public void the_tester_is_logged_into_the_console() {
         TestRunner.driver.get("C:/Users/18623/Desktop/Project One/Automation/Foundations-Project/run/src/test/resources/webpages/TesterConsole.html");
     }
-
+    
     @When("the tester waits for webpage to load")
-    public void the_tester_waits_for_webpage_to_load () {
+    public void the_tester_waits_for_webpage_to_load() {
         By fetch = By.id("fetching");
         WebElement button = TestRunner.driver.findElement(fetch);
         button.click();
     }
 
-    @When("the tester selects the defect id by level of priority")
-    public void the_tester_selects_the_defect_id_by_level_of_priority () {
-        By id = By.id("object");
-        WebElement defectId = TestRunner.driver.findElement(id);
-        defectId.sendKeys("19006");
+    @When("the tester selects a defect level of priority first")
+    public void the_tester_selects_a_defect_level_of_priority_first() {
+        By select = By.id("object");
+        System.out.println(select);
+        WebElement object = TestRunner.driver.findElement(select);
+        object.click();
+    }
+    @When("the tester updates a defect status to accept first")
+    public void the_tester_updates_a_defect_status_to_accept_first() {
+        By selectElementBy = By.id("condition");
+        WebElement condition = TestRunner.driver.findElement(selectElementBy);
+        Select c = new Select(condition);
+        c.selectByIndex(1);
+        
     }
 
-    @When("the tester updates defect status to fixed")
-    public void the_tester_updates_defect_status_to_fixed (String Fixed) {
+    @When("the tester clicks on button to apply changes first")
+    public void the_tester_clicks_on_button_to_apply_changes_first() throws InterruptedException {
+        By apply = By.id("update");
+        WebElement button = TestRunner.driver.findElement(apply);
+        button.click();
+        Thread.sleep(2000);
+        TestRunner.driver.switchTo().alert().accept();
+    }
+
+    @When("the tester selects a defect level of priority second")
+    public void the_tester_selects_a_defect_level_of_priority_second() {
+        By select = By.id("object");
+        System.out.println(select);
+        WebElement object = TestRunner.driver.findElement(select);
+        object.click();
+    }
+    @When("the tester updates a defect status to accept second")
+    public void the_tester_updates_a_defect_status_to_accept_second() {
+        By selectElementBy = By.id("condition");
+        WebElement condition = TestRunner.driver.findElement(selectElementBy);
+        Select c = new Select(condition);
+        c.selectByIndex(2);
+    }
+
+    @When("the tester clicks on button to apply changes second")
+    public void the_tester_clicks_on_button_to_apply_changes_second() throws InterruptedException {
+        By apply = By.id("update");
+        WebElement button = TestRunner.driver.findElement(apply);
+        button.click();
+        Thread.sleep(2000);
+        TestRunner.driver.switchTo().alert().accept();
+    }
+
+    @When("the tester selects a defect level of priority third")
+    public void the_tester_selects_a_defect_level_of_priority_third() throws InterruptedException {
+        By select = By.id("object");
+        System.out.println(select);
+        WebElement object = TestRunner.driver.findElement(select);
+        object.click();
+    }
+
+    @When("the tester updates a defect status to accept third")
+    public void the_tester_updates_a_defect_status_to_accept_third() throws InterruptedException {
+        By selectElement = By.id("condition");
+        WebElement condition = TestRunner.driver.findElement(selectElement);
+        Select c = new Select(condition);
+        c.selectByIndex(1);
+        By apply = By.id("update");
+        WebElement button = TestRunner.driver.findElement(apply);
+        button.click();
+        Thread.sleep(2000);
+        TestRunner.driver.switchTo().alert().accept();
         By selectElementBy = By.id("troubleshoot");
         WebElement troubleshoot = TestRunner.driver.findElement(selectElementBy);
         Select t = new Select(troubleshoot);
         t.selectByIndex(1);
     }
 
-    @When("the tester clicks on button to apply changes")
-    public void the_tester_clicks_on_button_to_apply_changes () {
+    @When("the tester clicks on button to apply changes third")
+    public void the_tester_clicks_on_button_to_apply_changes_third () throws InterruptedException{
         By apply = By.id("update");
         WebElement button = TestRunner.driver.findElement(apply);
         button.click();
+        Thread.sleep(2000);
+        TestRunner.driver.switchTo().alert().accept();
     }
 
-    @Then("the tester should be notified of the changes an via terminal")
-    public void the_tester_should_be_notified_of_the_changes_an_via_terminal() {
-        System.out.println("the end.");
+    @When("the tester selects a defect level of priority fourth")
+    public void the_tester_selects_a_defect_level_of_priority_fourth() {
+        By select = By.id("object");
+        System.out.println(select);
+        WebElement object = TestRunner.driver.findElement(select);
+        object.click();
+    }
+    
+    @When("the tester updates a defect status to accept fourth")
+    public void the_tester_updates_a_defect_status_to_accept_fourth() throws InterruptedException {
+        By selectElement = By.id("condition");
+        WebElement condition = TestRunner.driver.findElement(selectElement);
+        Select c = new Select(condition);
+        c.selectByIndex(1);
+        By apply = By.id("update");
+        WebElement button = TestRunner.driver.findElement(apply);
+        button.click();
+        Thread.sleep(2000);
+        TestRunner.driver.switchTo().alert().accept();
+        By selectElementBy = By.id("troubleshoot");
+        WebElement troubleshoot = TestRunner.driver.findElement(selectElementBy);
+        Select t = new Select(troubleshoot);
+        t.selectByIndex(2);
+    }
+
+    @When("the tester clicks on button to apply changes fourth")
+    public void the_tester_clicks_on_button_to_apply_changes_fourth() throws InterruptedException {
+        By apply = By.id("update");
+        WebElement button = TestRunner.driver.findElement(apply);
+        button.click();
+        Thread.sleep(2000);
+        TestRunner.driver.switchTo().alert().accept();
+    }
+
+    @When("the tester selects a defect level of priority fifth")
+    public void the_tester_selects_a_defect_level_of_priority_fifth() {
+        By select = By.id("object");
+        System.out.println(select);
+        WebElement object = TestRunner.driver.findElement(select);
+        object.click();
+    }
+
+    @When("the tester updates a defect status to accept fifth")
+    public void the_tester_updates_a_defect_status_to_accept_fifth() throws InterruptedException {
+        By selectElement = By.id("condition");
+        WebElement condition = TestRunner.driver.findElement(selectElement);
+        Select c = new Select(condition);
+        c.selectByIndex(1);
+        By apply = By.id("update");
+        WebElement button = TestRunner.driver.findElement(apply);
+        button.click();
+        Thread.sleep(2000);
+        TestRunner.driver.switchTo().alert().accept();
+        By selectElementBy = By.id("troubleshoot");
+        WebElement troubleshoot = TestRunner.driver.findElement(selectElementBy);
+        Select t = new Select(troubleshoot);
+        t.selectByIndex(3);
+    }
+
+    @When("the tester clicks on button to apply changes fifth")
+    public void the_tester_clicks_on_button_to_apply_changes_fifth() throws InterruptedException {
+        By apply = By.id("update");
+        WebElement button = TestRunner.driver.findElement(apply);
+        button.click();
+        Thread.sleep(2000);
+        TestRunner.driver.switchTo().alert().accept();
+    }
+
+    @Then("you get an alert")
+    public void you_get_an_alert() {
+        System.out.println("The end.");
     }
 
 }

@@ -12,8 +12,7 @@ import io.cucumber.java.en.When;
 
 public class LoginAsManager {
 
-    public LoginAsManager() {
-    }
+    WebDriver driver;
 
     @Given("the manager is on the login page")
     public void the_manager_is_on_the_login_page (){
@@ -24,7 +23,7 @@ public class LoginAsManager {
     public void the_manager_enters_the_correct_username (){
         By usernameInfo = By.id("username");
         WebElement username = TestRunner.driver.findElement(usernameInfo);
-        username.sendKeys("Eric");
+        username.sendKeys("Eric23");
     }
 
     @When("the manager enters the correct password")
