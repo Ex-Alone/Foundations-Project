@@ -19,4 +19,4 @@ Feature: Testers should be able to administer and monitor network security explo
         When    the tester selects a defect level of priority fifth
         When    the tester updates a defect status to accept fifth
         When    the tester clicks on button to apply changes fifth
-        Then    you get an alert
+        Then    you get a print line statement

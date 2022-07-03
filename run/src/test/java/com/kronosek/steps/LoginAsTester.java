@@ -44,4 +44,5 @@ public class LoginAsTester {
     public void the_manager_should_be_logged_in (){
         System.out.println("I executed.");
     }
+    
 }

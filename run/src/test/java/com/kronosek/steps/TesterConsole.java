@@ -53,7 +53,6 @@ public class TesterConsole {
         By apply = By.id("update");
         WebElement button = TestRunner.driver.findElement(apply);
         button.click();
-
         By name = By.id("object");
         WebElement tester = TestRunner.driver.findElement(name);
         tester.sendKeys("00000");
@@ -81,6 +80,7 @@ public class TesterConsole {
     public void the_tester_selects_a_defect_level_of_priority_second() {
         defectId();
     }
+
     @When("the tester updates a defect status to accept second")
     public void the_tester_updates_a_defect_status_to_accept_second() {
         int x = 2;
@@ -149,8 +149,8 @@ public class TesterConsole {
         update();
     }
 
-    @Then("you get an alert")
-    public void you_get_an_alert() {
+    @Then("you get a print line statement")
+    public void you_get_a_print_line_statement() {
         System.out.println("Success!");
     }
 
