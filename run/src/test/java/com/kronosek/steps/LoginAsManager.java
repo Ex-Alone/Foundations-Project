@@ -42,6 +42,6 @@ public class LoginAsManager {
 
     @Then("the manager should be logged in")
     public void the_manager_should_be_logged_in (){
-        System.out.println("I executed");
+        System.out.println("I executed.");
     }
 }

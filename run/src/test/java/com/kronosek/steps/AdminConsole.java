@@ -57,11 +57,11 @@ public class AdminConsole {
             Select p = new Select(priority);
             p.selectByIndex(i);
             priority.click();
-            Thread.sleep(1000);
+            Thread.sleep(2000);
             By submitButton = By.id("submit");
             WebElement submit = TestRunner.driver.findElement(submitButton);
             submit.click();
-            Thread.sleep(1000);
+            Thread.sleep(2000);
 
     }
 

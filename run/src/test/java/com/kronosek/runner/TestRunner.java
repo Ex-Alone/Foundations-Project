@@ -28,6 +28,7 @@ public class TestRunner {
     public static TesterConsole testerConsole;
     public static TestRunner testRunner;
     public static WebDriverWait wait;
+    public static Object button;
 
     @BeforeClass // this makes the method execute before all the steps
     public static void setup(){

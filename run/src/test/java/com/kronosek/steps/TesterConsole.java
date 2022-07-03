@@ -32,7 +32,7 @@ public class TesterConsole {
         By apply = By.id("update");
         WebElement button = TestRunner.driver.findElement(apply);
         button.click();
-        Thread.sleep(2250);
+        Thread.sleep(1000);
         TestRunner.driver.switchTo().alert().accept();
     }
 
@@ -49,10 +49,16 @@ public class TesterConsole {
     }
     
     @When("the tester waits for webpage to load")
-    public void the_tester_waits_for_webpage_to_load() {
-        By fetch = By.id("fetching");
-        WebElement button = TestRunner.driver.findElement(fetch);
+    public void the_tester_waits_for_webpage_to_load() throws InterruptedException {
+        By apply = By.id("update");
+        WebElement button = TestRunner.driver.findElement(apply);
         button.click();
+
+        By name = By.id("object");
+        WebElement tester = TestRunner.driver.findElement(name);
+        tester.sendKeys("00000");
+        defectId();
+        Thread.sleep(2000);
     }
 
     @When("the tester selects a defect level of priority first")
@@ -145,7 +151,7 @@ public class TesterConsole {
 
     @Then("you get an alert")
     public void you_get_an_alert() {
-        System.out.println("The end.");
+        System.out.println("Success!");
     }
 
 }
