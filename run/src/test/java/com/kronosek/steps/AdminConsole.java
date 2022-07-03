@@ -31,7 +31,7 @@ public class AdminConsole {
             
         int classB = 172;
         int octect2 = (int)(Math.random() * 16) + 16;
-        int octect3 = (int)(Math.random() * 254) + 1;
+        int octect3 = (int)(Math.random() * 255) + 0;
         int octect4 = (int)(Math.random() * 254) + 1;
 
         defect.sendKeys(Integer.toString(classB));
