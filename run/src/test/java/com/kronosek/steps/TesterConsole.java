@@ -14,9 +14,6 @@ public class TesterConsole {
     
     WebDriver driver;
 
-    public TesterConsole() {
-    }
-
     void defectId(){
         By select = By.id("object");
         System.out.println(select);

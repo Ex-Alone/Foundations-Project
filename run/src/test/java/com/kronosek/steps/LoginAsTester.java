@@ -11,9 +11,7 @@ import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 
 public class LoginAsTester {
-    
-    public LoginAsTester() {
-    }
+
 
     @Given("the tester is on the login page")
     public void the_tester_is_on_the_login_page (){

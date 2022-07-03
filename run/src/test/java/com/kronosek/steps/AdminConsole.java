@@ -29,7 +29,7 @@ public class AdminConsole {
         By securityAlert = By.id("defect");
         WebElement defect = TestRunner.driver.findElement(securityAlert);
             
-        int classB = 172;
+        int classB = 172; // 172.16.0.0 - 172.32.255.255 - (private addressing)
         int octect2 = (int)(Math.random() * 16) + 16;
         int octect3 = (int)(Math.random() * 255) + 0;
         int octect4 = (int)(Math.random() * 254) + 1;

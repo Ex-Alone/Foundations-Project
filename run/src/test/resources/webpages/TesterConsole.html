@@ -70,9 +70,9 @@
             }
             await fetch(`https://bugcatcher.coe.revaturelabs.com/6/defects/${y}`, config); //match defectId to change status
             console.log(`id: ${y} is changing status: ${all}`);
-            fetchDefects();
+            
         }
-        
+        fetchDefects();
     }
     const fetching = document.getElementById("fetching");
     const update = document.getElementById("update");
