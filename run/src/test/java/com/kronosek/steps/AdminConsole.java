@@ -12,6 +12,7 @@ public class AdminConsole {
     
     WebDriver driver;
     int binary;
+
     @Given("the manager is on the admin console")
     public void the_manager_is_on_the_admin_console (){
         TestRunner.driver.get("C:/Users/18623/Desktop/Project One/Automation/Foundations-Project/run/src/test/resources/webpages/AdminConsole.html");
@@ -35,6 +36,7 @@ public class AdminConsole {
                 defect.sendKeys(Integer.toString(binary));
                 i++;
             }//₿
+
             defect.sendKeys(".");
             i=0;
             defect.sendKeys(Integer.toString(binary));
@@ -43,6 +45,7 @@ public class AdminConsole {
                 defect.sendKeys(Integer.toString(binary));
                 i++;
             }//₿
+
             defect.sendKeys(".");
             i=0;
             defect.sendKeys(Integer.toString(binary));
@@ -51,6 +54,7 @@ public class AdminConsole {
                 defect.sendKeys(Integer.toString(binary));
                 i++;
             }//₿
+
             defect.sendKeys(".");
             i=0;
             while (i<8){ //setting up ipv4 address to ping class a b c
@@ -62,7 +66,7 @@ public class AdminConsole {
     }
         
     @When("the manager selects a priority level")
-    public void the_manager_selects_a_priority_level (){//skipped for now, randomized in javascript
+    public void the_manager_selects_a_priority_level () throws InterruptedException{//skipped for now, randomized in javascript
         // int e = (int)(Math.random() * 3) + 0;
         // By selectElementBy = By.id("priority");
         // WebElement priority = TestRunner.driver.findElement(selectElementBy);
@@ -74,13 +78,12 @@ public class AdminConsole {
         // }else if(e == 3){
         //     i.selectByIndex(2);
         // }
-        
         System.out.println("What is the value of this: ");
     }
 
 
     @Then("the manager clicks on the submit button and ok on the alert box")
-    public void the_manager_clicks_on_the_submit_button_and_ok_the_alert_box (){
+    public void the_manager_clicks_on_the_submit_button_and_ok_the_alert_box () throws InterruptedException{
         By submitButton = By.id("submit");
         WebElement submit = TestRunner.driver.findElement(submitButton);
         submit.click();

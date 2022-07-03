@@ -26,26 +26,26 @@
 
    submit.addEventListener("click", defect);
    //priority.addEventListener("click", defect);
-   
 
    async function defect(){
-        // let API create the defect
-        function getRandomInt(max) {
+
+      // let API create the defect
+      function getRandomInt(max) {
          return Math.floor(Math.random() * max); //this is a temporary fix until i figure out why java doesn't select the drop down
       }
 
       let sp;
       let random = getRandomInt(3); //random severity and priority are equal, ping 32 bit ipv4 address, coming up
 
-      if(random === 0){
+      if(random === 0){ //temporary fix
          sp = "Low";
-      }else if(random ===1){
+      }else if(random === 1){
          sp = "Medium";
-       
-      }else if(random ===2){
+      }else if(random === 2){
          sp = "High";
          
       }
+
         let createDefect =  {
             assignedTo: document.getElementById("tester").value,
             dateReported: 0,
@@ -65,7 +65,7 @@
             body: createDefectJSON
         }
         
-        let httpResponse = await fetch("https://bugcatcher.coe.revaturelabs.com/6/defects",config); // make sure to enter the url assigned to you
+        let httpResponse = await fetch("https://bugcatcher.coe.revaturelabs.com/6/defects", config); // make sure to enter the url assigned to you
 
         if(httpResponse.status === 201){ // 201 means a request was made successfully - POST
             console.log("Executed 201 Code")
